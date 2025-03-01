@@ -1,5 +1,27 @@
 **_Note:This repository uses GitLFS, to use this repo you need to pull via Git and make sure GitLFS is installed locally_**
 
+# Fork Information
+This fork aims to update Unity's boat attack to the new Render Graph API released in Unity 6. 
+I will also be updating the HLSL files because there are newer ways to do some of the Shader code since the shaders was first written.
+Specially in the places structured buffer data is used and some of the lighting is being done to shade the water.
+
+After that I will implement the multi-threading work I did using jobs and the burst compiler.
+This adds multi-threaded generation of meshes using NativeArrays to Triangulate the vertex and triangles for the mesh.
+It also includes IMeshStreams to stream data to the GPU buffer for compute shaders.
+
+For more information look at the Unity documentation for Mesh.MeshDataArrays and Mesh.AllocateWritableMeshData()
+
+
+This involves updating the following:
+
+1. Updating ScriptableRenderPass calls to the new render Graph API allowing for no memory allocations and better performance.
+2. GPU based culling.
+3. Mesh.ApplyAndDisposeWritableMeshData(meshDataArray, _mesh) implementation for writing high performance Mesh generation. 
+4. Adaptive Probe baking support for better light performance.
+5. Underwater shadow support.
+6. Underwater VFX.
+7. Real time mesh occlusion for making objects displace the water. 
+
 # Boat Attack
 ###### Demo Project using the Universal RP from Unity3D
 
@@ -31,9 +53,6 @@ via Git:
   1. Make sure you have GitLFS installed, check [here](https://git-lfs.github.com) for details.
   2. Clone the repo as usual via cmd/terminal or in your favourite Git GUI software.
   3. Checkout the branch that matches the Unity verison you are using, eg `release/2019.3`
-
-Downloadable zips:
-  1. [2019.3 Project (Unity 2019.3f5)](https://drive.google.com/file/d/1vXpbVC36GHnyC-Eitl1WpLay9l_YqJGQ/view?usp=sharing)
 
 #### Load the project:
 Once you have the project files locally you can load the project, ideally in the Unity version that is noted in the `ProjectSettings/ProjectVersion.txt` for the best experience.
